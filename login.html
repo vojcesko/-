@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Вхід</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+
+  </style>
+</head>
+<body>
+  <div class="modal" style="display:flex; flex-direction:column; align-items:center; justify-content:center; position:fixed; inset:0; background: rgba(0,0,0,0.3);">
+    <div class="container">
+      <div class="heading">Вхід</div>
+      <form id="login-form" class="form">
+        <input required class="input" type="text" name="username" id="login-username" placeholder="Логін" minlength="3">
+        <input required class="input" type="password" name="password" id="login-password" placeholder="Пароль" minlength="4">
+        <input class="login-button" type="submit" value="Увійти">
+        <label style="display:flex; align-items:center; gap:8px; margin-top:8px; font-size:14px;">
+          <input type="checkbox" id="admin-mode">
+          Увійти як адміністратор
+        </label>
+        <div style="text-align:center; font-size: 14px; margin-top: 10px;">
+          Немає акаунта? <a href="register.html" id="go-register" style="color:#0099ff; text-decoration:none;">Зареєструватися</a>
+        </div>
+        <div id="auth-error" style="display:none; background: rgba(255, 68, 68, 0.1); padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(255, 68, 68, 0.3); margin-top: 10px; color:#ff4444;"></div>
+      </form>
+    </div>
+  </div>
+  <script src="login.js"></script>
+</body>
+</html>

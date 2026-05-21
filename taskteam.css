@@ -1,0 +1,620 @@
+/* Стилі для сторінки спільних тасок */
+
+body {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 24px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.brand {
+  font-weight: 900;
+  font-size: 20px;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.nav-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.btn {
+  background: linear-gradient(45deg, #4a9eff 0%, #3182ce 100%);
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(74, 158, 255, 0.3);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(74, 158, 255, 0.5);
+}
+
+.btn.secondary {
+  background: linear-gradient(45deg, #6c757d 0%, #5a6268 100%);
+  box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
+}
+
+.btn.secondary:hover {
+  box-shadow: 0 8px 25px rgba(108, 117, 125, 0.5);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.todo-form-container {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.search-wrapper {
+  margin-bottom: 15px;
+}
+
+.search-container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #4a9eff;
+  box-shadow: 0 0 0 3px rgba(74, 158, 255, 0.1);
+}
+
+.button {
+  background: linear-gradient(45deg, #4a9eff 0%, #3182ce 100%);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(74, 158, 255, 0.3);
+}
+
+.form-controls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+select {
+  padding: 10px 12px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  background: white;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+}
+
+select:focus {
+  outline: none;
+  border-color: #4a9eff;
+}
+
+.tasks-container {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+#todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.todo-item {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border-left: 4px solid #4a9eff;
+}
+
+.todo-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.todo-item.Completed {
+  border-left-color: #48bb78;
+  background: linear-gradient(135deg, #f0fff4 0%, #ffffff 100%);
+}
+
+.todo-item.In\ Progress {
+  border-left-color: #ed8936;
+  background: linear-gradient(135deg, #fffaf0 0%, #ffffff 100%);
+}
+
+.todo-item.On\ Hold {
+  border-left-color: #a0aec0;
+  background: linear-gradient(135deg, #f7fafc 0%, #ffffff 100%);
+}
+
+.todo-item.Cancelled {
+  border-left-color: #e53e3e;
+  background: linear-gradient(135deg, #fed7d7 0%, #ffffff 100%);
+}
+
+.todo-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.todo-header {
+  flex: 1;
+}
+
+.todo-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.todo-meta {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.difficulty, .status {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.difficulty.easy {
+  background: #c6f6d5;
+  color: #22543d;
+}
+
+.difficulty.medium {
+  background: #fed7aa;
+  color: #7c2d12;
+}
+
+.difficulty.hard {
+  background: #fecaca;
+  color: #7f1d1d;
+}
+
+.status.New {
+  background: #bee3f8;
+  color: #2a4365;
+}
+
+.status.In\ Progress {
+  background: #fed7aa;
+  color: #7c2d12;
+}
+
+.status.On\ Hold {
+  background: #e2e8f0;
+  color: #4a5568;
+}
+
+.status.Completed {
+  background: #c6f6d5;
+  color: #22543d;
+}
+
+.status.Cancelled {
+  background: #fecaca;
+  color: #7f1d1d;
+}
+
+.todo-dates {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #718096;
+}
+
+.todo-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.btn-collaborate, .btn-participants {
+  background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-collaborate:hover, .btn-participants:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.no-tasks {
+  text-align: center;
+  padding: 40px 20px;
+  color: #718096;
+  font-size: 18px;
+  font-style: italic;
+}
+
+/* Модальні вікна */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.collaboration-container, .participants-container {
+  background: white;
+  border-radius: 15px;
+  padding: 25px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.collaboration-heading, .participants-heading {
+  font-size: 24px;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.collaboration-form, .add-participant-form {
+  margin-bottom: 20px;
+}
+
+.collaboration-select, .collaboration-textarea {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.collaboration-textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.collaboration-textarea:focus, .collaboration-select:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.collaboration-buttons, .participant-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.collaboration-submit-btn, .participant-submit-btn {
+  background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.collaboration-submit-btn:hover, .participant-submit-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.collaboration-cancel-btn {
+  background: #e2e8f0;
+  color: #4a5568;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.collaboration-cancel-btn:hover {
+  background: #cbd5e0;
+}
+
+.collaborations-list, .participants-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.collaboration-item, .participant-item {
+  padding: 15px;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.collaboration-item:last-child, .participant-item:last-child {
+  border-bottom: none;
+}
+
+.collaboration-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.collaboration-type {
+  background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.collaboration-date {
+  font-size: 12px;
+  color: #718096;
+}
+
+.collaboration-content {
+  color: #4a5568;
+  line-height: 1.5;
+}
+
+.collaboration-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+  width: 100%;
+}
+
+.btn-delete-collaboration {
+
+  background: linear-gradient(45deg, #e53e3e 0%, #c53030 100%);
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(229, 62, 62, 0.3);
+
+}
+
+.btn-delete-collaboration:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(229, 62, 62, 0.5);
+  background: linear-gradient(45deg, #c53030 0%, #9b2c2c 100%);
+}
+
+.participant-name {
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.participant-role {
+  background: #e2e8f0;
+  color: #4a5568;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Сповіщення */
+.notifications-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  min-width: 300px;
+  max-height: 400px;
+  overflow-y: auto;
+  z-index: 1001;
+  display: none;
+}
+
+.notifications-dropdown.show {
+  display: block;
+}
+
+.notifications-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.notification-item {
+  padding: 15px;
+  border-bottom: 1px solid #e2e8f0;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.notification-item:hover {
+  background: #f7fafc;
+}
+
+.notification-item.unread {
+  background: #ebf8ff;
+  border-left: 4px solid #4a9eff;
+}
+
+.notification-message {
+  font-weight: 500;
+  color: #2d3748;
+  margin-bottom: 5px;
+}
+
+.notification-date {
+  font-size: 12px;
+  color: #718096;
+}
+
+.mark-read-btn {
+  background: #4a9eff;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.mark-read-btn:hover {
+  background: #3182ce;
+}
+
+.no-notifications {
+  padding: 20px;
+  text-align: center;
+  color: #718096;
+  font-style: italic;
+}
+
+.inviter-info-container {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.inviter-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.inviter-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.inviter-nickname {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+/* Адаптивність */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  .todo-content {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .todo-actions {
+    justify-content: center;
+  }
+
+  .form-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  select {
+    width: 100%;
+  }
+
+  .collaboration-buttons, .participant-buttons {
+    flex-direction: column;
+  }
+
+  .collaboration-submit-btn, .participant-submit-btn, .collaboration-cancel-btn {
+    width: 100%;
+  }
+}

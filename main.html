@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Головна</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    html, body { height: 100%; }
+    body { min-height: 100vh; padding: 0; margin: 0; display:flex; flex-direction: column; }
+    .topbar { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:16px 24px; }
+    .brand { font-weight: 900; font-size: 20px; color:#2d3748; }
+    .nav-actions { display:flex; gap:10px; align-items:center; }
+    .btn { background: linear-gradient(45deg, #4a9eff 0%, #3182ce 100%); color: #fff; border:none; padding:10px 16px; border-radius:10px; cursor:pointer; font-weight:600; transition: all 0.3s ease; }
+    .btn.secondary { background: linear-gradient(45deg, #6c757d 0%, #5a6268 100%); }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(74, 158, 255, 0.3); }
+    .btn.secondary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(108, 117, 125, 0.3); }
+    
+    /* Стильна кнопка "Тарифи" */
+    #btn-pricing {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    }
+    
+    #btn-pricing::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+    
+    #btn-pricing:hover::before {
+      left: 100%;
+    }
+    
+    #btn-pricing:hover {
+      background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+      transform: translateY(-3px) scale(1.05);
+    }
+    .wrap { flex: 1; display: grid; place-items: center; padding: 24px; margin: 0;  }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="brand">Todo Subscriptions</div>
+    <div class="nav-actions">
+      <button id="btn-tasks" class="btn">Мої таски</button>
+      <button id="btn-team-tasks" class="btn">Спільні таски</button>
+      <button id="btn-pricing" class="btn">Тарифи</button>
+      <button id="btn-profile" class="btn">Профіль</button>
+      <button id="btn-logout" class="btn secondary">Вийти</button>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="card" id="user-card">
+      <div class="user-card-header">
+        <div class="user-info">
+          <div class="user-name" id="user-name">Користувач</div>
+          <div class="user-subscription" id="user-subscription">План: —</div>
+          <div class="user-counters">
+            <span id="user-tasks-count">Завдань: 0</span>
+            <span id="user-completed-count">Виконано: 0</span>
+            <span id="user-limit">Ліміт: -</span>
+          </div>
+        </div>
+        <div class="user-range-buttons">
+          <button class="btn secondary" data-range="hour" id="range-hour">За годину</button>
+          <button class="btn secondary" data-range="day" id="range-day">За день</button>
+          <button class="btn secondary" data-range="week" id="range-week">За тиждень</button>
+        </div>
+      </div>
+      <div class="user-card-body">
+        <canvas id="tasks-chart" width="600" height="260"></canvas>
+      </div>
+    </div>
+
+    <div id="subscription-modal" class="modal" style="display:none;">
+      <div class="subscription-container">
+        <button id="subscription-close" class="modal-close-x">×</button>
+        <h2 class="subscription-title">Тарифи підписки</h2>
+        <div id="subscription-plans" class="subscription-plans-grid"></div>
+      </div>
+    </div>
+    
+      <!-- Profile modal -->
+      <div id="profile-modal" class="modal" style="display:none;">
+        <div class="profile-modal-container">
+          <button id="profile-close" class="modal-close-x">×</button>
+          <div class="profile-header">
+            <div class="profile-avatar-section">
+              <div class="profile-avatar-wrapper">
+                <img id="profile-avatar-img" src="/profile.webp" alt="avatar" />
+                <button type="button" id="change-photo-btn" class="avatar-change-btn" title="Змінити фото">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="profile-info-section">
+              <h2 class="profile-name" id="profile-display-name">Мій профіль</h2>
+              <div class="profile-stats">
+                <div class="profile-stat-item">
+                  <div class="stat-label">Логін</div>
+                  <div class="stat-value" id="profile-username">-</div>
+                </div>
+                <div class="profile-stat-item">
+                  <div class="stat-label">План</div>
+                  <div class="stat-value stat-plan" id="profile-plan">-</div>
+                </div>
+                <div class="profile-stat-item">
+                  <div class="stat-label">Ліміт</div>
+                  <div class="stat-value stat-limit" id="profile-limit">-</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="profile-body">
+            <form id="profile-form" class="profile-form">
+              <div class="form-section">
+                <h3 class="section-title">Особиста інформація</h3>
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label for="profile-first-name">Ім'я</label>
+                    <input id="profile-first-name" name="first_name" type="text">
+                  </div>
+                  <div class="form-group">
+                    <label for="profile-last-name">Прізвище</label>
+                    <input id="profile-last-name" name="last_name" type="text">
+                  </div>
+                  <div class="form-group">
+                    <label for="profile-patronymic">По-батькові</label>
+                    <input id="profile-patronymic" name="patronymic" type="text">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="profile-login">Логін</label>
+                  <input id="profile-login" name="login" type="text">
+                </div>
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn-primary">Зберегти зміни</button>
+                <button type="button" id="change-password-btn" class="btn-secondary">Змінити пароль</button>
+              </div>
+            </form>
+
+            <form id="password-form" class="password-form">
+              <div class="form-section">
+                <h3 class="section-title">Зміна паролю</h3>
+                <div class="form-group">
+                  <label for="new-password">Новий пароль</label>
+                  <input id="new-password" type="password">
+                </div>
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn-primary">Оновити пароль</button>
+                <button type="button" id="cancel-password" class="btn-secondary">Скасувати</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

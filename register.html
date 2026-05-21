@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ук">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Реєстрація</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .two-col { display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+    @media (max-width:600px){ .two-col { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="modal" style="display:flex; flex-direction:column; align-items:center; justify-content:center; position:fixed; inset:0; background: rgba(0,0,0,0.3);">
+    <div class="container">
+      <div class="heading">Реєстрація</div>
+      <form id="register-form" class="form">
+        <div class="two-col">
+          <input required class="input" type="text" id="first_name" placeholder="Ім'я" minlength="2">
+          <input required class="input" type="text" id="last_name" placeholder="Прізвище" minlength="2">
+        </div>
+        <input class="input" type="text" id="middle_name" placeholder="По-батькові">
+        <input required class="input" type="text" id="username" placeholder="Логін" minlength="3">
+        <div class="two-col">
+          <input required class="input" type="password" id="password" placeholder="Пароль (мін. 6)" minlength="6">
+          <input required class="input" type="password" id="password_confirm" placeholder="Підтвердження паролю" minlength="6">
+        </div>
+        <input class="login-button" type="submit" value="Зареєструватися">
+        <div id="auth-error" style="display:none; background: rgba(255, 68, 68, 0.1); padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(255, 68, 68, 0.3); margin-top: 10px; color:#ff4444;"></div>
+        <div id="auth-success" style="display:none; background: rgba(46, 204, 113, 0.1); padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(46, 204, 113, 0.3); margin-top: 10px; color:#2ecc71; text-align:center;">Реєстрація успішна!</div>
+        <div style="text-align:center; font-size: 14px; margin-top: 10px;">
+          Вже маєте акаунт? <a href="login.html" style="color:#0099ff; text-decoration:none;">Вхід</a>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script src="register.js"></script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Спільні таски</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="taskteam.css">
+  <style>
+    body { min-height: 100vh; }
+  body.collaboration-mode { filter: none; }
+    .topbar { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:16px 24px; }
+    .brand { font-weight: 900; font-size: 20px; color:#ffffff; }
+    .nav-actions { display:flex; gap:10px; align-items:center; }
+    .btn { background: linear-gradient(45deg, #4a9eff 0%, #3182ce 100%); color: #fff; border:none; padding:10px 16px; border-radius:10px; cursor:pointer; font-weight:600; }
+    .btn.secondary { background: linear-gradient(45deg, #6c757d 0%, #5a6268 100%); }
+    .sort-option:hover { background: #f8f9fa; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="brand">Спільні таски</div>
+    <div class="nav-actions">
+      <button id="btn-back-to-own" class="btn secondary">Повернутися до власних завдань</button>
+      <button id="notifications-btn" class="btn secondary">Сповіщення (0)</button>
+      <button id="btn-home" class="btn secondary">На головну</button>
+      <button id="btn-logout" class="btn">Вийти</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="todo-form-container" style="display: none;">
+      <form id="todo-form">
+        <div class="search-wrapper">
+          <div class="search-container">
+            <input class="input" type="text" id="todo-input" placeholder="Нове завдання...s" required>
+            <div>
+              <button type="submit" class="button">
+                Додати
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="form-controls">
+          <select id="todo-difficulty" aria-label="Складність" title="Складність">
+            <option value="easy">Легка</option>
+            <option value="medium">Середня</option>
+            <option value="hard">Складна</option>
+          </select>
+          <select id="todo-status" aria-label="Статус" title="Статус">
+            <option value="New">Новий</option>
+            <option value="In Progress">В роботі</option>
+            <option value="On Hold">На паузі</option>
+            <option value="Completed">Виконано</option>
+            <option value="Cancelled">Скасовано</option>
+          </select>
+          <input type="date" id="todo-start-date" aria-label="Дата початку" title="Дата початку">
+          <input type="date" id="todo-due-date" aria-label="Дата завершення" title="Дата завершення">
+          <button id="btn-sort" class="btn sort-btn">Сортувати
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down">
+              <polyline points="6 9 12 3 0 3"></polyline>
+            </svg>
+          </button>
+          <div id="sort-menu" class="sort-menu">
+            <div class="sort-option" data-sort="difficulty-asc">Сортувати за складністю (зростання)</div>
+            <div class="sort-option" data-sort="difficulty-desc">Сортувати за складністю (спадання)</div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="inviter-info-container">
+      <div class="inviter-info">
+        <img id="inviter-avatar" src="" alt="Аватар" class="inviter-avatar">
+        <span id="inviter-nickname" class="inviter-nickname"></span>
+      </div>
+    </div>
+  </div>
+  <div class="tasks-container"><ul id="todo-list"></ul></div>
+  <!-- Модальне вікно коментарів -->
+  <div id="collaboration-modal" class="modal" style="display: none; flex-direction: column; align-items: center; justify-content: center; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.3); z-index: 1000;">
+    <div class="collaboration-container">
+      <div class="collaboration-heading">Коментарі</div>
+      <form id="collaboration-form" class="collaboration-form">
+        <select id="collaboration-type" required class="collaboration-select">
+          <option value="comment">Коментар</option>
+          <option value="code_snippet">Кодовий фрагмент</option>
+          <option value="math_solution">Математичне рішення</option>
+          <option value="edit">Поправка</option>
+        </select>
+        <textarea id="collaboration-content" placeholder="Введіть ваш внесок..." required class="collaboration-textarea"></textarea>
+        <div class="collaboration-buttons">
+          <button type="submit" class="collaboration-submit-btn">Додати</button>
+          <button type="button" onclick="window.hideCollaborationModal()" class="collaboration-cancel-btn">Скасувати</button>
+        </div>
+      </form>
+      <div id="collaborations-list" class="collaborations-list"></div>
+    </div>
+  </div>
+
+  <!-- Модальне вікно учасників -->
+  <div id="participants-modal" class="modal" style="display: none; flex-direction: column; align-items: center; justify-content: center; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.3); z-index: 1000;">
+    <div class="participants-container">
+      <div class="participants-heading">Учасники завдання</div>
+      <form id="add-participant-form" class="add-participant-form">
+        <select id="participant-user-select" required>
+          <option value="">Оберіть користувача</option>
+        </select>
+        <select id="participant-role-select" required>
+          <option value="Observer">Спостерігач</option>
+          <option value="Co-executor">Співвиконавець</option>
+          <option value="Responsible">Відповідальний</option>
+          <option value="Manager">Керівник</option>
+        </select>
+        <div class="participant-buttons">
+          <button type="submit" class="participant-submit-btn">Додати учасника</button>
+        </div>
+      </form>
+      <div id="participants-list" class="participants-list"></div>
+      <div class="modal-actions">
+        <button onclick="window.hideParticipantsModal()" class="btn secondary">Закрити</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Випадаюче меню сповіщень -->
+  <div id="notifications-dropdown" class="notifications-dropdown">
+    <div id="notifications-list" class="notifications-list"></div>
+  </div>
+
+  <script src="taskteam.js"></script>
+</body>
+</html>
