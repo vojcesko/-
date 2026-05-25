@@ -53,7 +53,7 @@
      host: 'localhost',
      user: 'your_username',
      password: 'your_password',
-     database: 'todo_db'
+     database: 'Task'
    });
    ```
 
