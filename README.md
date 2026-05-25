@@ -44,7 +44,7 @@
 
 4. Налаштуйте базу даних MySQL:
    ```sql
-   CREATE DATABASE todo_db;
+   CREATE DATABASE Task;
    ```
 
 5. Оновіть налаштування підключення до БД у `server.js`:
