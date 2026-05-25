@@ -1,4 +1,4 @@
-# TODO: Add ability to mark tasks as completed in taskteam.html
+# Task: Add ability to mark tasks as completed in taskteam.html
 
 ## Steps to Complete:
 - [x] Modify renderTodos function in taskteam.js to include a checkbox for marking tasks as completed

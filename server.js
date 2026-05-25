@@ -47,7 +47,7 @@ const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: '1234', // пароль від mysql
-  database: 'todo_bd2'
+  database: 'Task'
 });
 
 connection.connect((err) => {
